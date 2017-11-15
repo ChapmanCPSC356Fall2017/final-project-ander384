@@ -1,20 +1,21 @@
 package todolist.christine.anderson.todolist.fragments;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+        import android.os.Bundle;
+        import android.support.annotation.Nullable;
+        import android.support.v4.app.Fragment;
+        import android.text.Editable;
+        import android.text.TextWatcher;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.Button;
+        import android.widget.EditText;
+        import android.widget.TextView;
+        import android.widget.Toast;
 
-import todolist.christine.anderson.todolist.models.ToDoItemCollection;
-import todolist.christine.anderson.todolist.models.ToDoItemModel;
-import todolist.christine.anderson.todolist.R;
+        import todolist.christine.anderson.todolist.models.ToDoItemCollection;
+        import todolist.christine.anderson.todolist.models.ToDoItemModel;
+        import todolist.christine.anderson.todolist.R;
 
 /**
  * Created by Christine on 11/6/2017.
@@ -25,6 +26,7 @@ public class ToDoItemFragment extends Fragment {
     EditText titleEditText;
     EditText descriptionEditText;
     Button completeButton;
+    Button changeDateButton;
     TextView dateTextView;
 
     private ToDoItemModel item;
@@ -54,6 +56,22 @@ public class ToDoItemFragment extends Fragment {
         dateTextView.setText(item.dateToString());//TODO:new to String method
 
         completeButton = v.findViewById(R.id.btn_complete);
+
+        changeDateButton = v.findViewById(R.id.btn_change_date);
+        changeDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerFragment fragment = new DatePickerFragment();
+                Bundle b = new Bundle();
+                b.putString("item_id", item.getId());
+                fragment.setArguments(b);
+
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fl_fragment_container,fragment)
+                        .commit();
+            }
+        });
 
         this.titleEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -92,4 +110,5 @@ public class ToDoItemFragment extends Fragment {
 
         return v;
     }
+
 }

@@ -31,4 +31,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:recyclerview-v7:27.0.0'
     compile 'joda-time:joda-time:2.9.9'
+    compile 'com.android.support:design:27.0.0'
 }

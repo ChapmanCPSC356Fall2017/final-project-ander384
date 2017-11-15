@@ -19,5 +19,4 @@ public class ToDoItemActivity extends SingleFragmentActivity {
         return fragment;
     }
 
-
 }

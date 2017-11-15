@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_plus_sign_white"
+        android:onClick="onClickFloatingButton"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_to_do_list"
@@ -9,6 +18,5 @@
         android:layout_height="wrap_content">
 
     </android.support.v7.widget.RecyclerView>
-
 
 </FrameLayout>

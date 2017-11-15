@@ -16,7 +16,7 @@ public class ToDoItemModel {
     private String description;
     private DateTime date;
 
-    ToDoItemModel() {
+    public ToDoItemModel() {
         this.id = UUID.randomUUID().toString();
         this.date = DateTime.now();
     }
