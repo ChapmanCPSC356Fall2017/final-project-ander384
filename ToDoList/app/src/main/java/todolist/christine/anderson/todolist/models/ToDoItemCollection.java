@@ -1,6 +1,11 @@
-package todolist.christine.anderson.todolist.Models;
+package todolist.christine.anderson.todolist.models;
+
+import org.joda.time.DateTimeComparator;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -35,6 +40,8 @@ public class ToDoItemCollection {
             this.toDoItems.add(item);
 
         }
+        Comparator comparator = new ToDoItemModel.DateComparator();
+        Collections.sort(toDoItems, comparator);
     }
 
     public List<ToDoItemModel> getToDoItems()
@@ -45,6 +52,8 @@ public class ToDoItemCollection {
     public void addToDoItem(ToDoItemModel item)
     {
         this.toDoItems.add(item);
+        Comparator comparator = new ToDoItemModel.DateComparator();
+        Collections.sort(toDoItems, comparator);
     }
 
     public ToDoItemModel getToDoItem(String theId)
