@@ -1,5 +1,10 @@
 package todolist.christine.anderson.todolist.models;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+
 import org.joda.time.DateTime;
 
 import java.util.Comparator;
@@ -9,11 +14,19 @@ import java.util.UUID;
  * Created by Christine on 11/7/2017.
  */
 
+@Entity
 public class ToDoItemModel {
 
+    @PrimaryKey (autoGenerate = true)
+    private int dbId;
+
     private String id;
+
     private String title;
+
     private String description;
+
+    @Ignore
     private DateTime date;
 
     public ToDoItemModel() {
@@ -31,6 +44,11 @@ public class ToDoItemModel {
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String id)
+    {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -55,6 +73,14 @@ public class ToDoItemModel {
 
     public void setDate(DateTime date) {
         this.date = date;
+    }
+
+    public int getDbId() {
+        return dbId;
+    }
+
+    public void setDbId(int dbId) {
+        this.dbId = dbId;
     }
 
     private String dayName() {
@@ -111,7 +137,6 @@ public class ToDoItemModel {
         }
 
     }
-
 
 
     public static class DateComparator implements Comparator<ToDoItemModel> {

@@ -1,6 +1,7 @@
 package todolist.christine.anderson.todolist.fragments;
 
         import android.os.Bundle;
+        import android.support.annotation.NonNull;
         import android.support.annotation.Nullable;
         import android.support.v4.app.Fragment;
         import android.text.Editable;
@@ -27,6 +28,7 @@ public class ToDoItemFragment extends Fragment {
     EditText descriptionEditText;
     Button completeButton;
     Button changeDateButton;
+    android.support.design.widget.FloatingActionButton confirmButton;
     TextView dateTextView;
 
     private ToDoItemModel item;
@@ -37,25 +39,49 @@ public class ToDoItemFragment extends Fragment {
 
         String theId = this.getArguments().getString("item_id");
 
-        this.item = ToDoItemCollection.GetInstance().getToDoItem(theId);
+        this.item = ToDoItemCollection.GetInstance(getActivity().getApplication()).getToDoItem(theId);
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_to_do_item, container, false);
 
         titleEditText = v.findViewById(R.id.et_title);
-        titleEditText.setText(this.item.getTitle());
+        String myTitle;
+        if (this.item.getTitle()==null)
+        {
+            myTitle = "New Item";
+        }
+        else{
+            myTitle = this.item.getTitle();
+        }
+        titleEditText.setText(myTitle);
 
         descriptionEditText = v.findViewById(R.id.et_description);
-        descriptionEditText.setText(this.item.getDescription());
+        String myDescription;
+        if(this.item.getDescription()==null)
+        {
+            myDescription = "New Description";
+        }
+        else
+        {
+            myDescription = this.item.getDescription();
+        }
+        descriptionEditText.setText(myDescription);
 
         dateTextView = v.findViewById(R.id.tv_date);
         dateTextView.setText(item.dateToString());//TODO:new to String method
 
-        completeButton = v.findViewById(R.id.btn_complete);
+        confirmButton = v.findViewById(R.id.btn_confirm);
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
+
 
         changeDateButton = v.findViewById(R.id.btn_change_date);
         changeDateButton.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +96,15 @@ public class ToDoItemFragment extends Fragment {
                         .beginTransaction()
                         .replace(R.id.fl_fragment_container,fragment)
                         .commit();
+            }
+        });
+
+        completeButton = v.findViewById(R.id.btn_complete);
+        this.completeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToDoItemCollection.GetInstance(getActivity().getApplication()).removeToDoItem(item);
+                getActivity().finish();//TODO:figure out
             }
         });
 
@@ -88,6 +123,7 @@ public class ToDoItemFragment extends Fragment {
             public void afterTextChanged(Editable editable) {
 
                 item.setTitle(editable.toString());
+                ToDoItemCollection.GetInstance(getActivity().getApplication()).updateToDoItem(item);
             }
         });
 

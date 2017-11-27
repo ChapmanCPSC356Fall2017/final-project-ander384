@@ -34,7 +34,7 @@
     <Button
         android:id="@+id/btn_change_date"
         android:text="@string/change_date"
-        android:layout_above="@id/btn_complete"
+        android:layout_above="@id/btn_confirm"
         android:layout_alignParentEnd="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -49,6 +49,16 @@
         android:text="@string/complete"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/btn_complete"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_check_white_24dp" />
 
 
 </RelativeLayout>

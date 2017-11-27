@@ -1,7 +1,9 @@
 package todolist.christine.anderson.todolist.adapters;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,12 @@ import todolist.christine.anderson.todolist.models.ToDoItemModel;
 
 public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoItemHolder> {
 
+    private Application application;
+
+    public ToDoListAdapter(Application application)
+    {
+       this.application = application;
+    }
 
     @Override
     public ToDoItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -31,17 +39,15 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoIt
     @Override
     public void onBindViewHolder(ToDoItemHolder holder, int position)
     {
-        ToDoItemModel item = ToDoItemCollection.GetInstance().getToDoItems().get(position);
+        ToDoItemModel item = ToDoItemCollection.GetInstance(application).get(position);
 
         holder.setup(item);
     }
 
     @Override
     public int getItemCount() {
-        return ToDoItemCollection.GetInstance().getToDoItems().size();
+        return ToDoItemCollection.GetInstance(application).getSize();
     }
-
-
 
     public class ToDoItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {

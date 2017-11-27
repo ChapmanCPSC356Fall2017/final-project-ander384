@@ -18,24 +18,31 @@ import todolist.christine.anderson.todolist.adapters.ToDoListAdapter;
 
 public class ToDoListFragment extends Fragment {
 
+    private ViewGroup viewGroup;
     private ToDoListAdapter adapter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_to_do_list, container, false);
+        viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_to_do_list, container, false);
+
+        return viewGroup;
+
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
 
         RecyclerView toDoListView = viewGroup.findViewById(R.id.rv_to_do_list);
 
-        adapter = new ToDoListAdapter();
+        adapter = new ToDoListAdapter(getActivity().getApplication());
 
         toDoListView.setAdapter(adapter);
 
         toDoListView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        return viewGroup;
-
 
     }
 }

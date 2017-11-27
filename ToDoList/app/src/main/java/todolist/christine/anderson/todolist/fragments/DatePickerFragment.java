@@ -27,7 +27,7 @@ public class DatePickerFragment extends android.support.v4.app.Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String theId = getArguments().getString("item_id");
-        theModel = ToDoItemCollection.GetInstance().getToDoItem(theId);
+        theModel = ToDoItemCollection.GetInstance(getActivity().getApplication()).getToDoItem(theId);
     }
 
     @Nullable
