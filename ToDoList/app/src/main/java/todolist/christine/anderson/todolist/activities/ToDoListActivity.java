@@ -24,9 +24,7 @@ public class ToDoListActivity extends SingleFragmentActivity {
 
     public void onClickFloatingButton(View view) {
         ToDoItemModel newItem = new ToDoItemModel();
-        newItem.setTitle("New Item");
-        newItem.setDescription("NewItem");
-        ToDoItemCollection.GetInstance(getApplication()).addToDoItem(newItem);
+        //ToDoItemCollection.GetInstance(getApplication()).addToDoItem(newItem);
         Bundle bundle = new Bundle();
         bundle.putString("item_id", newItem.getId());
         Intent intent = new Intent(this, ToDoItemActivity.class);

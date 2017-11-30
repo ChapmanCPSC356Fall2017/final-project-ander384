@@ -66,7 +66,12 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoIt
         public void setup(ToDoItemModel itemModel)
         {
             this.toDoItem = itemModel;
-            this.toDoItemTitleTextView.setText(itemModel.getTitle());
+            String title= itemModel.getTitle();
+            if(title.equals(""))
+            {
+                title = "Untitled";
+            }
+            this.toDoItemTitleTextView.setText(title);
         }
 
         public void onClick(View itemView)

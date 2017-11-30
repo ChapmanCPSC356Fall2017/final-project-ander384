@@ -41,6 +41,10 @@ public class ToDoItemFragment extends Fragment {
         String theId = this.getArguments().getString("item_id");
 
         this.item = ToDoItemCollection.GetInstance(getActivity().getApplication()).getToDoItem(theId);
+        if(item==null)
+        {
+            this.item = new ToDoItemModel();
+        }
     }
 
     @Nullable
@@ -53,7 +57,7 @@ public class ToDoItemFragment extends Fragment {
         String myTitle;
         if (this.item.getTitle()==null)
         {
-            myTitle = "New Item";
+            myTitle = "";
         }
         else{
             myTitle = this.item.getTitle();
@@ -64,7 +68,7 @@ public class ToDoItemFragment extends Fragment {
         String myDescription;
         if(this.item.getDescription()==null)
         {
-            myDescription = "New Description";
+            myDescription = "";
         }
         else
         {

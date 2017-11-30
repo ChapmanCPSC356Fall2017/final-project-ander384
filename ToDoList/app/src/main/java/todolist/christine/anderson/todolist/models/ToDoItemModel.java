@@ -32,6 +32,8 @@ public class ToDoItemModel {
     public ToDoItemModel() {
         this.id = UUID.randomUUID().toString();
         this.date = DateTime.now();
+        this.title = "";
+        this.description = "";
     }
 
     public String dateToString() {
