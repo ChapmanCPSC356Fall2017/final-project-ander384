@@ -1,6 +1,9 @@
 package todolist.christine.anderson.todolist.fragments;
 
+        import android.app.Activity;
         import android.app.DatePickerDialog;
+        import android.content.DialogInterface;
+        import android.content.Intent;
         import android.os.Bundle;
         import android.support.annotation.NonNull;
         import android.support.annotation.Nullable;
@@ -15,6 +18,7 @@ package todolist.christine.anderson.todolist.fragments;
         import android.widget.TextView;
         import android.widget.Toast;
 
+        import org.joda.time.DateTime;
         import org.joda.time.format.DateTimeFormat;
         import org.joda.time.format.DateTimeFormatter;
 
@@ -106,6 +110,26 @@ public class ToDoItemFragment extends Fragment {
         changeDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final DatePickerDialog dialog = new DatePickerDialog(getContext(),null, item.getDate().getYear(), item.getDate().getMonthOfYear()-1, item.getDate().getDayOfMonth());
+                dialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //Bundle b = dialog.onSaveInstanceState();
+
+                        //Intent intent = new Intent().putExtras(b);
+
+                        //getTargetFragment().onActivityResult(1000, Activity.RESULT_OK, intent);
+                    }
+                });
+                dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //Does nothing
+                    }
+
+                });
+                dialog.show();
+
                 /*DatePickerFragment fragment = new DatePickerFragment();
                 Bundle b = new Bundle();
                 b.putString("item_id", item.getId());
