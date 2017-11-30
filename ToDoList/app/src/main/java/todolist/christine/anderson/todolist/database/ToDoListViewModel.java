@@ -2,10 +2,7 @@ package todolist.christine.anderson.todolist.database;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LiveData;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 
 import java.util.List;
 
@@ -47,14 +44,14 @@ public class ToDoListViewModel extends AndroidViewModel {
 
     public void deleteItem(ToDoItemModel itemModel) {
         toDoItemList.remove(itemModel);
-        new deleteAsyncTask(appDatabase).execute(itemModel);
+        new DeleteAsyncTask(appDatabase).execute(itemModel);
     }
 
-    private static class deleteAsyncTask extends AsyncTask<ToDoItemModel, Void, Void> {
+    private static class DeleteAsyncTask extends AsyncTask<ToDoItemModel, Void, Void> {
 
         private AppDatabase db;
 
-        deleteAsyncTask(AppDatabase appDatabase) {
+        DeleteAsyncTask(AppDatabase appDatabase) {
             db = appDatabase;
         }
 

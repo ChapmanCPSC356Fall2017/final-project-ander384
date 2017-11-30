@@ -29,7 +29,8 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoIt
     }
 
     @Override
-    public ToDoItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ToDoItemHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.cell_to_do_item, parent, false);
 

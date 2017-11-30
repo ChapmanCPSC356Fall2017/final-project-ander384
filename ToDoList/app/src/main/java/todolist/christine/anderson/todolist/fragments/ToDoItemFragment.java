@@ -1,5 +1,6 @@
 package todolist.christine.anderson.todolist.fragments;
 
+        import android.app.DatePickerDialog;
         import android.os.Bundle;
         import android.support.annotation.NonNull;
         import android.support.annotation.Nullable;
@@ -78,6 +79,7 @@ public class ToDoItemFragment extends Fragment {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ToDoItemCollection.GetInstance(getActivity().getApplication()).addToDoItem(item);
                 getActivity().finish();
             }
         });
@@ -87,7 +89,7 @@ public class ToDoItemFragment extends Fragment {
         changeDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = new DatePickerFragment();
+                /*DatePickerFragment fragment = new DatePickerFragment();
                 Bundle b = new Bundle();
                 b.putString("item_id", item.getId());
                 fragment.setArguments(b);
@@ -95,7 +97,7 @@ public class ToDoItemFragment extends Fragment {
                 getFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fl_fragment_container,fragment)
-                        .commit();
+                        .commit();*/
             }
         });
 
