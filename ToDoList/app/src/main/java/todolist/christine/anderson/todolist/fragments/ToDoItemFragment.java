@@ -15,6 +15,9 @@ package todolist.christine.anderson.todolist.fragments;
         import android.widget.TextView;
         import android.widget.Toast;
 
+        import org.joda.time.format.DateTimeFormat;
+        import org.joda.time.format.DateTimeFormatter;
+
         import todolist.christine.anderson.todolist.models.ToDoItemCollection;
         import todolist.christine.anderson.todolist.models.ToDoItemModel;
         import todolist.christine.anderson.todolist.R;
@@ -33,6 +36,7 @@ public class ToDoItemFragment extends Fragment {
     TextView dateTextView;
 
     private ToDoItemModel item;
+    boolean newItem = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +48,7 @@ public class ToDoItemFragment extends Fragment {
         if(item==null)
         {
             this.item = new ToDoItemModel();
+            newItem = true;
         }
     }
 
@@ -77,13 +82,21 @@ public class ToDoItemFragment extends Fragment {
         descriptionEditText.setText(myDescription);
 
         dateTextView = v.findViewById(R.id.tv_date);
-        dateTextView.setText(item.dateToString());//TODO:new to String method
+        dateTextView.setText(item.getDate().toString(DateTimeFormat.longDate()));//TODO:new to String method
 
         confirmButton = v.findViewById(R.id.btn_confirm);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ToDoItemCollection.GetInstance(getActivity().getApplication()).addToDoItem(item);
+                if(newItem)
+                {
+                    ToDoItemCollection.GetInstance(getActivity().getApplication()).addToDoItem(item);
+                }
+                else
+                {
+                    ToDoItemCollection.GetInstance(getActivity().getApplication()).updateToDoItem(item);
+                }
+
                 getActivity().finish();
             }
         });
