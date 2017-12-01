@@ -114,11 +114,8 @@ public class ToDoItemFragment extends Fragment {
                 dialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        //Bundle b = dialog.onSaveInstanceState();
-
-                        //Intent intent = new Intent().putExtras(b);
-
-                        //getTargetFragment().onActivityResult(1000, Activity.RESULT_OK, intent);
+                        item.setDate(new DateTime(dialog.getDatePicker().getYear(), dialog.getDatePicker().getMonth()+1, dialog.getDatePicker().getDayOfMonth(), 0, 0));
+                        dateTextView.setText(item.getDate().toString(DateTimeFormat.longDate()));
                     }
                 });
                 dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "CANCEL", new DialogInterface.OnClickListener() {
