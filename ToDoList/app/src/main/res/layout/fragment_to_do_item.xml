@@ -12,14 +12,29 @@
         android:textSize="25sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:hint="@string/title"/>
+        android:hint="@string/enter_title_of_task"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tv_description_header"
+        android:layout_below="@id/et_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/details"
+        android:textSize="12sp"
+        style="?android:listSeparatorTextViewStyle"/>
 
     <EditText
         android:id="@+id/et_description"
-        android:layout_below="@id/et_title"
-        android:hint="@string/description"
+        android:layout_below="@id/tv_description_header"
+        android:layout_above="@id/btn_change_date"
+        android:background="@drawable/edit_text_style1"
+        android:hint="@string/enter_description_of_task"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:padding="10dp"
+        android:layout_margin="5dp"/>
 
     <TextView
         android:id="@+id/tv_date"

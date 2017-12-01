@@ -55,7 +55,7 @@ public class ToDoItemCollection {
         //Collections.sort(toDoItems, comparator);
     }
 
-    public List<ToDoItemModel> getToDoItems()
+    public Collection<ToDoItemModel> getToDoItems()
     {
         return this.listViewModel.getToDoItemList();
     }
@@ -73,8 +73,9 @@ public class ToDoItemCollection {
     public void addToDoItem(ToDoItemModel item)
     {
         this.listViewModel.addItem(item);
-        //Comparator comparator = new ToDoItemModel.DateComparator();
-        //Collections.sort(toDoItems, comparator);
+        //DateTimeComparator comparator = DateTimeComparator.getDateOnlyInstance();
+        ToDoItemModel.ToDoItemComparator comparator = new ToDoItemModel.ToDoItemComparator();
+        Collections.sort(listViewModel.getToDoItemList(), comparator);
     }
 
     public void updateToDoItem(ToDoItemModel item)

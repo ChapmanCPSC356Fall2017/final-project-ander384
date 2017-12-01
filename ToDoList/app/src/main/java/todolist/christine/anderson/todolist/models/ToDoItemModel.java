@@ -8,6 +8,7 @@ import android.arch.persistence.room.TypeConverter;
 import android.arch.persistence.room.TypeConverters;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeComparator;
 
 import java.util.Comparator;
 import java.util.UUID;
@@ -19,7 +20,7 @@ import java.util.UUID;
 @Entity
 public class ToDoItemModel {
 
-    @PrimaryKey (autoGenerate = true)
+    @PrimaryKey(autoGenerate = true)
     private int dbId;
 
     private String id;
@@ -38,20 +39,11 @@ public class ToDoItemModel {
         this.description = "";
     }
 
-    public String dateToString() {
-        String dayOfWeek = this.dayName();
-        int dayOfMonth = date.getDayOfMonth();
-        String month = this.monthName();
-        int year = date.getYear();
-        return dayOfWeek + " " + dayOfMonth + " " + month + ", " + year;
-    }
-
     public String getId() {
         return id;
     }
 
-    public void setId(String id)
-    {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -87,103 +79,19 @@ public class ToDoItemModel {
         this.dbId = dbId;
     }
 
-    private String dayName() {
-        switch (date.getDayOfWeek()) {
-            case 1:
-                return "Monday";
-            case 2:
-                return "Tuesday";
-            case 3:
-                return "Wednesday";
-            case 4:
-                return "Thursday";
-            case 5:
-                return "Friday";
-            case 6:
-                return "Saturday";
-            case 7:
-                return "Sunday";
-            default:
-                return "No Day";
-
-        }
-    }
-
-
-    private String monthName() {
-        switch (date.getMonthOfYear()) {
-            case 1:
-                return "January";
-            case 2:
-                return "February";
-            case 3:
-                return "March";
-            case 4:
-                return "April";
-            case 5:
-                return "May";
-            case 6:
-                return "June";
-            case 7:
-                return "July";
-            case 8:
-                return "August";
-            case 9:
-                return "September";
-            case 10:
-                return "October";
-            case 11:
-                return "November";
-            case 12:
-                return "December";
-            default:
-                return "No Month";
-        }
-
-    }
-
-
-    public static class DateComparator implements Comparator<ToDoItemModel> {
+    public static class ToDoItemComparator implements Comparator<ToDoItemModel> {
         @Override
-        public int compare(ToDoItemModel item1, ToDoItemModel item2)
-        {
-            if (item1.getDate().getYear()<item2.getDate().getYear())
-            {
+        public int compare(ToDoItemModel item1, ToDoItemModel item2) {
+            DateTimeComparator comparator = DateTimeComparator.getDateOnlyInstance();
+            if (comparator.compare(item1.getDate(), item2.getDate()) == -1) {
                 return -1;
-            }
-            else if(item1.getDate().getYear()>item2.getDate().getYear())
-            {
+            } else if (comparator.compare(item1.getDate(), item2.getDate()) == 1) {
                 return 1;
+            } else {
+                return 0;
             }
-            else
-            {
-                if(item1.getDate().getMonthOfYear()<item2.getDate().getMonthOfYear())
-                {
-                    return -1;
-                }
-                else if(item1.getDate().getMonthOfYear()>item2.getDate().getMonthOfYear())
-                {
-                    return 1;
-                }
-                else
-                {
-                    if(item1.getDate().getDayOfMonth()<item2.getDate().getDayOfMonth())
-                    {
-                        return -1;
-                    }
-                    else if (item1.getDate().getDayOfMonth()>item2.getDate().getDayOfMonth())
-                    {
-                        return 1;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
-                }
-            }
+
         }
-
-
     }
 }
 
