@@ -9,14 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.ToDoListActivity">
+        <activity android:name=".activities.ToDoListActivity" android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ToDoItemActivity">
+        <activity android:name=".activities.ToDoItemActivity" android:configChanges="screenSize|orientation">
 
         </activity>
     </application>

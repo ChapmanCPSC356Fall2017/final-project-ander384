@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:padding="10dp">
@@ -16,8 +18,21 @@
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/tv_description_header"
+        android:id="@+id/tv_date"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/et_title"
+        android:layout_centerInParent="true"
+        tools:text="11/13/17"
+        android:padding="7dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@drawable/date_tv_background"/>
+
+    <TextView
+        android:id="@+id/tv_description_header"
+        android:layout_below="@id/tv_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/details"
@@ -27,7 +42,7 @@
     <EditText
         android:id="@+id/et_description"
         android:layout_below="@id/tv_description_header"
-        android:layout_above="@id/btn_change_date"
+        android:layout_above="@id/btn_complete"
         android:background="@drawable/edit_text_style1"
         android:hint="@string/enter_description_of_task"
         android:layout_width="match_parent"
@@ -36,32 +51,17 @@
         android:padding="10dp"
         android:layout_margin="5dp"/>
 
-    <TextView
-        android:id="@+id/tv_date"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toStartOf="@id/btn_change_date"
-        android:layout_alignBottom="@id/btn_change_date"
-        android:layout_alignTop="@id/btn_change_date"
-        android:layout_alignParentStart="true"
-        tools:text="11/13/17"/>
-    <Button
-        android:id="@+id/btn_change_date"
-        android:text="@string/change_date"
-        android:layout_above="@id/btn_confirm"
-        android:layout_alignParentEnd="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
     <Button
         android:id="@+id/btn_complete"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/button_shape"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/complete"
+        android:text="@string/task_complete"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold|italic"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>
 
@@ -70,10 +70,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toStartOf="@id/btn_complete"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_margin="20dp"
-        android:src="@drawable/ic_check_white_24dp" />
+        android:layout_marginEnd="15dp"
+        android:layout_alignTop="@id/btn_complete"
+        android:src="@drawable/ic_check_white_24dp"
+        android:backgroundTint="@color/colorPrimary"/>
 
 
 </RelativeLayout>

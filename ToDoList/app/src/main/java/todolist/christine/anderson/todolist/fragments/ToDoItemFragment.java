@@ -35,7 +35,6 @@ public class ToDoItemFragment extends Fragment {
     EditText titleEditText;
     EditText descriptionEditText;
     Button completeButton;
-    Button changeDateButton;
     android.support.design.widget.FloatingActionButton confirmButton;
     TextView dateTextView;
 
@@ -87,27 +86,7 @@ public class ToDoItemFragment extends Fragment {
 
         dateTextView = v.findViewById(R.id.tv_date);
         dateTextView.setText(item.getDate().toString(DateTimeFormat.longDate()));//TODO:new to String method
-
-        confirmButton = v.findViewById(R.id.btn_confirm);
-        confirmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(newItem)
-                {
-                    ToDoItemCollection.GetInstance(getActivity().getApplication()).addToDoItem(item);
-                }
-                else
-                {
-                    ToDoItemCollection.GetInstance(getActivity().getApplication()).updateToDoItem(item);
-                }
-
-                getActivity().finish();
-            }
-        });
-
-
-        changeDateButton = v.findViewById(R.id.btn_change_date);
-        changeDateButton.setOnClickListener(new View.OnClickListener() {
+        dateTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final DatePickerDialog dialog = new DatePickerDialog(getContext(),null, item.getDate().getYear(), item.getDate().getMonthOfYear()-1, item.getDate().getDayOfMonth());
@@ -127,15 +106,23 @@ public class ToDoItemFragment extends Fragment {
                 });
                 dialog.show();
 
-                /*DatePickerFragment fragment = new DatePickerFragment();
-                Bundle b = new Bundle();
-                b.putString("item_id", item.getId());
-                fragment.setArguments(b);
+            }
+        });
 
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fl_fragment_container,fragment)
-                        .commit();*/
+        confirmButton = v.findViewById(R.id.btn_confirm);
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(newItem)
+                {
+                    ToDoItemCollection.GetInstance(getActivity().getApplication()).addToDoItem(item);
+                }
+                else
+                {
+                    ToDoItemCollection.GetInstance(getActivity().getApplication()).updateToDoItem(item);
+                }
+
+                getActivity().finish();
             }
         });
 

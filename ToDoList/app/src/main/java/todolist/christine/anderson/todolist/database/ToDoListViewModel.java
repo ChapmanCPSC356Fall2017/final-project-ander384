@@ -36,7 +36,6 @@ public class ToDoListViewModel extends AndroidViewModel {
     {
         toDoItemList.add(itemModel);
         new AddAsyncTask(appDatabase).execute(itemModel);
-        //appDatabase.getItemDao().addItem(itemModel);
     }
 
     public void updateItem(ToDoItemModel itemModel)
@@ -44,7 +43,6 @@ public class ToDoListViewModel extends AndroidViewModel {
         new UpdateAsyncTask(appDatabase).execute(itemModel);
         ToDoItemModel.ToDoItemComparator comparator = new ToDoItemModel.ToDoItemComparator();
         Collections.sort(toDoItemList, comparator);
-        //appDatabase.getItemDao().updateItem(itemModel);
     }
 
     public List<ToDoItemModel> getToDoItemList() {

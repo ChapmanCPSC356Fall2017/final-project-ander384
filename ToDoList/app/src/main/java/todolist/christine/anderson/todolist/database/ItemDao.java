@@ -33,14 +33,8 @@ public interface ItemDao
     @Query("select * from todoitemmodel where id = :id")
     ToDoItemModel getItembyId(String id);
 
-    @Insert
-    void insertAll(List<ToDoItemModel> items);
-
     @Insert(onConflict = REPLACE)
     void addItem(ToDoItemModel item);
-
-    @Insert
-    void insertNew(ToDoItemModel item);
 
     @Delete
     void deleteItem(ToDoItemModel item);

@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.joda.time.format.DateTimeFormat;
+
 import todolist.christine.anderson.todolist.R;
 import todolist.christine.anderson.todolist.activities.ToDoItemActivity;
 import todolist.christine.anderson.todolist.models.ToDoItemCollection;
@@ -54,16 +56,18 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoIt
     {
         private ToDoItemModel toDoItem;
         private TextView toDoItemTitleTextView;
+        private TextView dateTextView;
 
-        public ToDoItemHolder(View itemView) {
+        ToDoItemHolder(View itemView) {
             super(itemView);
 
             itemView.setOnClickListener(this);
 
             this.toDoItemTitleTextView = itemView.findViewById(R.id.tv_to_do_item_title);
+            this.dateTextView = itemView.findViewById(R.id.tv_display_date);
         }
 
-        public void setup(ToDoItemModel itemModel)
+        void setup(ToDoItemModel itemModel)
         {
             this.toDoItem = itemModel;
             String title= itemModel.getTitle();
@@ -72,6 +76,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoIt
                 title = "Untitled";
             }
             this.toDoItemTitleTextView.setText(title);
+            this.dateTextView.setText(toDoItem.getDate().toString(DateTimeFormat.longDate()));
         }
 
         public void onClick(View itemView)

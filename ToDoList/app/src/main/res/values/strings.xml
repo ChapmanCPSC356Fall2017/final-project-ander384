@@ -10,4 +10,5 @@
     <string name="enter_description_of_task">Enter description of task...</string>
     <string name="enter_title_of_task">Enter title of task...</string>
     <string name="task">Task</string>
+    <string name="task_complete">Task Complete!</string>
 </resources>
