@@ -85,7 +85,7 @@ public class ToDoItemFragment extends Fragment {
         descriptionEditText.setText(myDescription);
 
         dateTextView = v.findViewById(R.id.tv_date);
-        dateTextView.setText(item.getDate().toString(DateTimeFormat.longDate()));//TODO:new to String method
+        dateTextView.setText(item.getDate().toString(DateTimeFormat.longDate()));
         dateTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,7 +131,7 @@ public class ToDoItemFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ToDoItemCollection.GetInstance(getActivity().getApplication()).removeToDoItem(item);
-                getActivity().finish();//TODO:figure out
+                getActivity().finish();
             }
         });
 
