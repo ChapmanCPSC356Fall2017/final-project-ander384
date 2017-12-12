@@ -40,22 +40,10 @@ public class ToDoItemCollection {
 
 
     private ToDoListViewModel listViewModel;
-    //private LiveData<List<ToDoItemModel>> toDoItems;
 
     private ToDoItemCollection(Application application)
     {
         this.listViewModel = new ToDoListViewModel(application);
-        //this.toDoItems = listFromDatabase.getToDoItemList();
-        /*//TODO: This is temporary to make sure it works
-        for(int i=0; i<100; ++i)
-        {
-            ToDoItemModel item = new ToDoItemModel();
-            item.setTitle("Item "+(i+1));
-            this.toDoItems.add(item);
-
-        }*/
-        //Comparator comparator = new ToDoItemModel.DateComparator();
-        //Collections.sort(toDoItems, comparator);
     }
 
     public Collection<ToDoItemModel> getToDoItems()
