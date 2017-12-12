@@ -8,8 +8,11 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 import android.content.ClipData;
 
+import org.joda.time.DateTime;
+
 import java.util.List;
 
+import todolist.christine.anderson.todolist.models.DateConverter;
 import todolist.christine.anderson.todolist.models.ToDoItemModel;
 
 import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
@@ -41,4 +44,5 @@ public interface ItemDao
 
     @Update
     void updateItem(ToDoItemModel item);
+
 }

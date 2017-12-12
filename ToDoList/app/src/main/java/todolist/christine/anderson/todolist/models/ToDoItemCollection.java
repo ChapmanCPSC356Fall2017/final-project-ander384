@@ -6,6 +6,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.support.annotation.NonNull;
 
+import org.joda.time.DateTime;
 import org.joda.time.DateTimeComparator;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class ToDoItemCollection {
 
 
     private static ToDoItemCollection collection;
+    private Application app;
 
     public static ToDoItemCollection GetInstance(Application application)
     {
@@ -31,6 +33,7 @@ public class ToDoItemCollection {
         {
             collection = new ToDoItemCollection(application);
         }
+        collection.app = application;
 
         return collection;
     }
@@ -76,6 +79,12 @@ public class ToDoItemCollection {
         //DateTimeComparator comparator = DateTimeComparator.getDateOnlyInstance();
         ToDoItemModel.ToDoItemComparator comparator = new ToDoItemModel.ToDoItemComparator();
         Collections.sort(listViewModel.getToDoItemList(), comparator);
+    }
+
+    public void reloadList()
+    {
+        collection = null;
+        ToDoItemCollection.GetInstance(app);
     }
 
     public void updateToDoItem(ToDoItemModel item)

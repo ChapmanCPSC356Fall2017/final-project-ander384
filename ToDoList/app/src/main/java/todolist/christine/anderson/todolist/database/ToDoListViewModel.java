@@ -5,9 +5,12 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.persistence.room.Update;
 import android.os.AsyncTask;
 
+import org.joda.time.DateTime;
+
 import java.util.Collections;
 import java.util.List;
 
+import todolist.christine.anderson.todolist.models.ToDoItemCollection;
 import todolist.christine.anderson.todolist.models.ToDoItemModel;
 
 /**
@@ -20,9 +23,11 @@ public class ToDoListViewModel extends AndroidViewModel {
 
     private AppDatabase appDatabase;
 
+    private Application application;
+
     public ToDoListViewModel(Application application) {
         super(application);
-
+        this.application = application;
         appDatabase = AppDatabase.getAppDatabase(this.getApplication());
 
         toDoItemList = appDatabase.getItemDao().getAllItems();
@@ -35,7 +40,7 @@ public class ToDoListViewModel extends AndroidViewModel {
     public void addItem(ToDoItemModel itemModel)
     {
         toDoItemList.add(itemModel);
-        new AddAsyncTask(appDatabase).execute(itemModel);
+        new AddAsyncTask(appDatabase, application).execute(itemModel);
     }
 
     public void updateItem(ToDoItemModel itemModel)
@@ -90,14 +95,17 @@ public class ToDoListViewModel extends AndroidViewModel {
     private static class AddAsyncTask extends AsyncTask<ToDoItemModel, Void, Void>
     {
         private AppDatabase db;
+        private Application application;
 
-        AddAsyncTask(AppDatabase appDatabase) {
+        AddAsyncTask(AppDatabase appDatabase, Application application) {
             db = appDatabase;
+            this.application = application;
         }
 
         @Override
         protected Void doInBackground(final ToDoItemModel... params) {
             db.getItemDao().addItem(params[0]);
+            ToDoItemCollection.GetInstance(application).reloadList();
             return null;
         }
 

@@ -13,7 +13,7 @@ import todolist.christine.anderson.todolist.models.ToDoItemModel;
  */
 
 
-@Database(entities = {ToDoItemModel.class}, version = 2,exportSchema = false)
+@Database(entities = {ToDoItemModel.class}, version = 4,exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
@@ -22,7 +22,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     static AppDatabase getAppDatabase(Context context) {
         if (INSTANCE == null) {
-            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "myDatabase").allowMainThreadQueries().build();
+            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "myDatabase").allowMainThreadQueries().fallbackToDestructiveMigration().build();
 
         }
         return INSTANCE;
